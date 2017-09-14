@@ -29,25 +29,13 @@ echo "kubectl get statefulset ubuntu-stset -o json | jq .spec.template.spec.cont
 kubectl get statefulset ubuntu-stset -o json | jq '.spec.template.spec.containers[0].resources, .status'
 read line
 echo "=================================================================================="
-echo "Resizing the pod (increasing the request of CPU to 7, which doesn't fit the host.)"
+echo "Resizing the pod (increasing the request of CPU to 8, which doesn't fit the host.)"
 echo "=================================================================================="
-echo "kubectl patch statefulset ubuntu-stset -p '{"spec":{"template":{"spec":{"containers":[{"name":"ubuntu-stset","resources":{"requests":{"cpu":"7"}}}]}}}}'"
-kubectl patch statefulset ubuntu-stset -p '{"spec":{"template":{"spec":{"containers":[{"name":"ubuntu-stset","resources":{"requests":{"cpu":"7"}}}]}}}}'
+echo "kubectl patch statefulset ubuntu-stset -p '{"spec":{"template":{"spec":{"containers":[{"name":"ubuntu-stset","resources":{"requests":{"cpu":"8"}}}]}}}}'"
+kubectl patch statefulset ubuntu-stset -p '{"spec":{"template":{"spec":{"containers":[{"name":"ubuntu-stset","resources":{"requests":{"cpu":"8"}}}]}}}}'
 read line
 echo "============================================="
 echo "The Status of the pod indicating the failure."
-echo "============================================="
-echo "kubectl get statefulset ubuntu-stset -o json | jq .spec.template.spec.containers[0].resources, .status"
-kubectl get statefulset ubuntu-stset -o json | jq '.spec.template.spec.containers[0].resources, .status'
-read line
-echo "=================================================="
-echo "Resizing the pod (reducing the request of CPU to 1)"
-echo "=================================================="
-echo "kubectl patch statefulset ubuntu-stset -p '{"spec":{"template":{"spec":{"containers":[{"name":"ubuntu-stset","resources":{"requests":{"cpu":"1"}}}]}}}}'"
-kubectl patch statefulset ubuntu-stset -p '{"spec":{"template":{"spec":{"containers":[{"name":"ubuntu-stset","resources":{"requests":{"cpu":"1"}}}]}}}}'
-read line
-echo "============================================="
-echo "The resized resources of the pod on the k8s."
 echo "============================================="
 echo "kubectl get statefulset ubuntu-stset -o json | jq .spec.template.spec.containers[0].resources, .status"
 kubectl get statefulset ubuntu-stset -o json | jq '.spec.template.spec.containers[0].resources, .status'
