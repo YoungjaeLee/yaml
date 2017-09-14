@@ -16,7 +16,7 @@ metadata:
   name: ubuntu-stset
 spec:
   serviceName: "ubuntu-stset"
-  replicas: 4
+  replicas: 5
   updateStrategy:
     type: "RollingUpdate"
   template:
@@ -34,10 +34,10 @@ spec:
         tty: true
         resources:
            requests:
-               cpu: "3"
+               cpu: "2"
                memory: "1Gi"
            limits:
-               cpu: "16"
+               cpu: "10"
                memory: "3Gi"
            resizePolicy:
-               cpu: "LiveResizable"
+               cpu: "Disabled"
