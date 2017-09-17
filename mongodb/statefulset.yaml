@@ -5,11 +5,15 @@ metadata:
 spec:
   serviceName: "mongo"
   replicas: 2
+  updateStrategy:
+    type: "RollingUpdate"
   template:
     metadata:
       labels:
         role: mongo
         environment: test
+      annotations:
+        resizeAction: LiveResize
     spec:
       terminationGracePeriodSeconds: 10
       containers:
@@ -28,11 +32,11 @@ spec:
               mountPath: /data/db
           resources:
             requests:
-              cpu: "2"
-              memory: "1Gi"
+              cpu: "200m"
+              memory: "500Mi"
             limits:
-              cpu: "6"
-              memory: "3Gi"
+              cpu: "1"
+              memory: "1Gi"
             resizePolicy:
               cpu: "LiveResizeable"
         - name: mongo-sidecar

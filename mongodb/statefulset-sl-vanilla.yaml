@@ -12,8 +12,6 @@ spec:
       labels:
         role: mongo
         environment: test
-      annotations:
-        resizeAction: LiveResize
     spec:
       terminationGracePeriodSeconds: 10
       containers:
@@ -37,8 +35,6 @@ spec:
             limits:
               cpu: "6"
               memory: "3Gi"
-            resizePolicy:
-              cpu: "LiveResizeable"
         - name: mongo-sidecar
           image: cvallance/mongo-k8s-sidecar
           env:
