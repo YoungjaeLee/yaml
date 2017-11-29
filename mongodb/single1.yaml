@@ -1,52 +1,42 @@
 apiVersion: apps/v1beta1
 kind: StatefulSet
 metadata:
-  name: mongo
+  name: mongo1
 spec:
-  serviceName: "mongo"
+  serviceName: "mongo1"
   replicas: 1
   updateStrategy:
     type: "RollingUpdate"
   template:
     metadata:
       labels:
-        role: mongo
+        role: mongo1
         environment: test
       annotations:
         resizeAction: LiveResize
     spec:
       terminationGracePeriodSeconds: 10
       containers:
-        - name: mongo
+        - name: mongo1
           image: mongo
           command:
             - mongod
-            - "--replSet"
-            - rs0
-            - "--smallfiles"
             - "--noprealloc"
           ports:
             - containerPort: 27017
           volumeMounts:
-            - name: mongo-persistent-storage
+            - name: mongo1-persistent-storage
               mountPath: /data/db
           resources:
-            requests:
-              cpu: "200m"
-              memory: "1Gi"
             limits:
-              cpu: "1"
-              memory: "2Gi"
+              cpu: "500m"
+              memory: "2G"
             resizePolicy:
-              cpu: "LiveResizeable"
-        - name: mongo-sidecar
-          image: cvallance/mongo-k8s-sidecar
-          env:
-            - name: MONGO_SIDECAR_POD_LABELS
-              value: "role=mongo,environment=test"
+              cpu: "Disabled"
+              memory: "Disabled"
   volumeClaimTemplates:
   - metadata:
-      name: mongo-persistent-storage
+      name: mongo1-persistent-storage
       annotations:
         volume.beta.kubernetes.io/storage-class: "ceph"
     spec:
