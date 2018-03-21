@@ -2,8 +2,8 @@
 
 set -x
 
-while true; do
 kubectl patch statefulset mongo1 -p '{"spec":{"template":{"spec":{"containers":[{"name":"mongo1","resources":{"limits":{"cpu":"500m", "memory":"2G"}}}]}}}}'
+while true; do
 PHASE=$(kubectl get pod mongo1-0 -o json | jq -r .status.phase)
 if [ $PHASE == "Running" ]
 then

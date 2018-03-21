@@ -2,6 +2,8 @@ apiVersion: v1
 kind: Pod
 metadata:
     name: ubuntu
+    labels:
+      reservation-test: test
 spec:
     restartPolicy: Always
     containers:
@@ -12,10 +14,10 @@ spec:
       tty: true
       resources:
         limits:
-            cpu: "12"
+            cpu: 10
             memory: "2Gi"
         requests:
-            cpu: "2"
+            cpu: 2
             memory: "1Gi"
         resizePolicy:
             cpu: "LiveResizable"

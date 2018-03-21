@@ -1,5 +1,5 @@
 recordcount=200000
-operationcount=1500000
+operationcount=6000000
 readproportion=1
 updateproportion=0
 scanproportion=0
